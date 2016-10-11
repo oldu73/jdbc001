@@ -1,45 +1,41 @@
 package com.company;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Main {
 
     public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException, SQLException {
 
-        // DB
-        String DB_DRIVER = "com.mysql.jdbc.Driver";
-        String DB_URL = "jdbc:mysql://192.168.1.147";
-        String DB_USER = "oldu";
-        String DB_PASS = "oldu";
-        String DB_SQL = "SELECT * from test001.test001";
-        //String DB_SQL = "show databases";
-        //String DB_SQL = "show tables from test001";
-
         System.out.println();
         System.out.println("Hello, world!");
         System.out.println();
 
-        Class.forName(DB_DRIVER).newInstance();
-        Connection dbConnection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
-        ResultSet dbResultSet = dbConnection.createStatement().executeQuery(DB_SQL);
+        // DB
+        String DB1_DRIVER = "com.mysql.jdbc.Driver";
+        String DB1_URL = "jdbc:mysql://192.168.1.147";
+        String DB1_USER = "oldu";
+        String DB1_PASS = "oldu";
+        String DB1_SQL = "SELECT * from dbtest001.tabletest001";
+        //String DB1_SQL = "show databases";
+        //String DB1_SQL = "show tables from test001";
 
-        for (int i = 0; i < dbResultSet.getMetaData().getColumnCount(); i++) {
-            String name = dbResultSet.getMetaData().getColumnName(i + 1);
-            String type = dbResultSet.getMetaData().getColumnTypeName(i + 1);
+        DbConnect dbConnect1 = new DbConnect(DB1_DRIVER, DB1_URL, DB1_USER, DB1_PASS);
+        dbConnect1.executeQuery(DB1_SQL);
+        dbConnect1.systemOutResultSetInfo();
+        dbConnect1.systemOutResultSetContent();
 
-            System.out.println("name: " + name + " / type: " + type);
-        }
+        // DB
+        String DB2_DRIVER = "com.mysql.jdbc.Driver";
+        String DB2_URL = "jdbc:mysql://192.168.1.149";
+        String DB2_USER = "oldu";
+        String DB2_PASS = "oldu";
+        String DB2_SQL = "SELECT * from dbtest002.tabletest002";
+        //String DB2_SQL = "show databases";
+        //String DB2_SQL = "show tables from dbtest002";
 
-        System.out.println();
-
-        while (dbResultSet.next()) {
-            for (int i = 1; i < dbResultSet.getMetaData().getColumnCount() + 1; i++) {
-                System.out.print(" " + dbResultSet.getMetaData().getColumnName(i) + "=" + dbResultSet.getObject(i));
-            }
-            System.out.println("");
-        }
+        DbConnect dbConnect2 = new DbConnect(DB2_DRIVER, DB2_URL, DB2_USER, DB2_PASS);
+        dbConnect2.executeQuery(DB2_SQL);
+        dbConnect2.systemOutResultSetInfo();
+        dbConnect2.systemOutResultSetContent();
     }
 }
