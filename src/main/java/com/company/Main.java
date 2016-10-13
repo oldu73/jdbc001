@@ -37,5 +37,19 @@ public class Main {
         dbConnect2.executeQuery(DB2_SQL);
         dbConnect2.systemOutResultSetInfo();
         dbConnect2.systemOutResultSetContent();
+
+        // DB
+        String DB3_DRIVER = "org.postgresql.Driver";
+        String DB3_URL = "jdbc:postgresql://192.168.1.139/test1";
+        String DB3_USER = "test1";
+        String DB3_PASS = "test1";
+        String DB3_SQL = "SELECT * FROM public.playground";
+        //String DB3_SQL = "show databases";
+        //String DB3_SQL = "show tables from dbtest002";
+
+        DbConnect dbConnect3 = new DbConnect(DB3_DRIVER, DB3_URL, DB3_USER, DB3_PASS);
+        dbConnect3.executeQuery(DB3_SQL);
+        dbConnect3.systemOutResultSetInfo();
+        dbConnect3.systemOutResultSetContent();
     }
 }
