@@ -23,6 +23,22 @@ public class Main {
         dbConnect1.executeQuery(DB1_SQL);
         dbConnect1.systemOutResultSetInfo();
         dbConnect1.systemOutResultSetContent();
+        dbConnect1.close();
+
+        // #################################################################################
+
+        // mysql1, 2ième DB
+        String DB11_DRIVER = "com.mysql.jdbc.Driver";
+        String DB11_URL = "jdbc:mysql://192.168.1.114";
+        String DB11_USER = "oldu";
+        String DB11_PASS = "oldu";
+        String DB11_SQL = "SELECT * from dbtest2.tabletest2";
+
+        DbConnect dbConnect11 = new DbConnect(DB11_DRIVER, DB11_URL, DB11_USER, DB11_PASS);
+        dbConnect11.executeQuery(DB11_SQL);
+        dbConnect11.systemOutResultSetInfo();
+        dbConnect11.systemOutResultSetContent();
+        dbConnect11.close();
 
         // #################################################################################
 
@@ -37,22 +53,50 @@ public class Main {
         dbConnect2.executeQuery(DB2_SQL);
         dbConnect2.systemOutResultSetInfo();
         dbConnect2.systemOutResultSetContent();
+        dbConnect2.close();
 
         // #################################################################################
-/*
+
+        // mysql2, 2ième DB
+        String DB22_SQL = "SELECT * from dbtest2.tabletest2";
+
+        dbConnect2.executeQuery(DB22_SQL);
+        dbConnect2.systemOutResultSetInfo();
+        dbConnect2.systemOutResultSetContent();
+        dbConnect2.close();
+
+        // #################################################################################
+
         // postgresql
         String DB3_DRIVER = "org.postgresql.Driver";
-        String DB3_URL = "jdbc:postgresql://192.168.1.139/test1";
-        String DB3_USER = "test1";
-        String DB3_PASS = "test1";
-        String DB3_SQL = "SELECT * FROM public.playground";
+        String DB3_URL = "jdbc:postgresql://192.168.1.117/oldu";
+        String DB3_USER = "oldu";
+        String DB3_PASS = "oldu";
+        //String DB3_SQL = "SELECT * FROM public.tabletest";
+        String DB3_SQL = "SELECT * FROM tabletest";
 
         DbConnect dbConnect3 = new DbConnect(DB3_DRIVER, DB3_URL, DB3_USER, DB3_PASS);
         dbConnect3.executeQuery(DB3_SQL);
         dbConnect3.systemOutResultSetInfo();
         dbConnect3.systemOutResultSetContent();
+        dbConnect3.close();
 
         // #################################################################################
-        */
+
+        // mariadb1
+        String DB4_DRIVER = "org.mariadb.jdbc.Driver";
+        String DB4_URL = "jdbc:mariadb://192.168.1.118:3306";
+        String DB4_USER = "oldu";
+        String DB4_PASS = "oldu";
+        String DB4_SQL = "SELECT * from dbtest.tabletest";
+
+        DbConnect dbConnect4 = new DbConnect(DB4_DRIVER, DB4_URL, DB4_USER, DB4_PASS);
+        dbConnect4.executeQuery(DB4_SQL);
+        dbConnect4.systemOutResultSetInfo();
+        dbConnect4.systemOutResultSetContent();
+        dbConnect4.close();
+
+        // #################################################################################
+
     }
 }

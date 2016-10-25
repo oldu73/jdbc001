@@ -33,17 +33,24 @@ public class DbConnect {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
 
+    public void executeQuery(String sql) {
         try {
-            dbConnection = DriverManager.getConnection(db_url, db_user, db_pass);
+            if (dbConnection == null || dbConnection.isClosed()) {
+                dbConnection = DriverManager.getConnection(db_url, db_user, db_pass);
+            }
+            dbResultSet = dbConnection.createStatement().executeQuery(sql);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void executeQuery(String sql) {
+    // Google search: jdbc important to close connection
+    // http://stackoverflow.com/questions/4507440/must-jdbc-resultsets-and-statements-be-closed-separately-although-the-connection
+    public void close() {
         try {
-            dbResultSet = dbConnection.createStatement().executeQuery(sql);
+            dbConnection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
